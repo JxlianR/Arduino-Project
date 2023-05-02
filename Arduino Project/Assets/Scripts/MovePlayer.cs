@@ -13,7 +13,14 @@ public class MovePlayer : MonoBehaviour
 
     Rigidbody2D rb;
 
-    public float movementSpeed, jumpHeight;
+    // Move variables
+    public float movementSpeed;
+
+    // Jump variables
+    bool isGrounded;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    public float jumpHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +35,8 @@ public class MovePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+
         /*if (isStreaming)
         {
             //Debug.Log("Hello World");
@@ -51,7 +60,7 @@ public class MovePlayer : MonoBehaviour
                 Debug.Log(value);
                 Move(value);
             }
-            else if (value == "Jump")
+            else if (value == "Jump" && isGrounded == false)
             {
                 Jump();
             }
@@ -109,6 +118,7 @@ public class MovePlayer : MonoBehaviour
     void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+        isGrounded = false;
     }
 
     /* 0 = 10

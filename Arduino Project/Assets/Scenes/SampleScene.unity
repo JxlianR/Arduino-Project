@@ -716,6 +716,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4472527340078735388, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
+      propertyPath: jumpHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472527340078735388, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 854146302}
+    - target: {fileID: 4472527340078735388, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4472527340078735389, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
       propertyPath: m_SortingOrder
       value: 0
