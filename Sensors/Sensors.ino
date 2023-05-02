@@ -4,8 +4,10 @@
 long distance;
 long duration;
 
+int photoresistor = A1;
+
 int input;
-int ledPin = 5;
+//int ledPin = 5;
 bool LED = false;
 
 void setup() {
@@ -28,13 +30,18 @@ void loop() {
   duration = pulseIn(Echo_EingangsPin, HIGH);
   distance = duration / 58.2;
 
-  if (distance <= 150){
-    Serial.println(distance);
-  }
-  else{
-    Serial.printl("Jump");
+  //Serial.println(distance);
+
+  int val = analogRead(photoresistor);
+  float voltage = val * (5.0/1023) * 1000;
+  float resistance = 10000 * (voltage / (5000.0 - voltage));
+  if (voltage < 230)
+  {
+    Serial.println("LightsOn");
   }
   delay(100);
+
+  
 
   // Change led:
   /*delay(100);

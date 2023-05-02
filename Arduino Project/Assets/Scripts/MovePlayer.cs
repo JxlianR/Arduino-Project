@@ -18,7 +18,7 @@ public class MovePlayer : MonoBehaviour
 
     // Jump variables
     bool isGrounded;
-    public Transform groundCheck;
+    public Transform playerFeet;
     public LayerMask groundLayer;
     public float jumpHeight;
 
@@ -35,22 +35,8 @@ public class MovePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.1f, groundLayer);
 
-        /*if (isStreaming)
-        {
-            //Debug.Log("Hello World");
-            string value = ReadSerialPort();
-            if (value != null)
-            {
-                Debug.Log(value);
-                Move(value);
-            }
-        }*/
-    }
-
-    private void FixedUpdate()
-    {
         if (isStreaming)
         {
             //Debug.Log("Hello World");
@@ -58,35 +44,51 @@ public class MovePlayer : MonoBehaviour
             if (value != null)
             {
                 Debug.Log(value);
-                Move(value);
-            }
-            else if (value == "Jump" && isGrounded == false)
-            {
-                Jump();
+                int input = Int32.Parse(value);
+                if (input <= 40)
+                    Move(input);
+                else if (isGrounded == true)
+                    Jump();
             }
         }
     }
 
-    void Move(string value)
+    private void FixedUpdate()
     {
-        int input = Int32.Parse(value);
+        /*if (isStreaming)
+        {
+            //Debug.Log("Hello World");
+            string value = ReadSerialPort();
+            if (value != null)
+            {
+                Debug.Log(value);
+                int input = Int32.Parse(value);
+                if (input <= 24)
+                    Move(input);
+                else if (isGrounded == true)
+                    Jump();
+            }
+        }*/
+    }
 
+    void Move(int input)
+    {
         /// <summary>
         /// Threshold of 20cm
         /// if the hand is closer than that, the player moves to the left side
         /// if the hand is further away, the player moves to the right side
         /// </summary>
-        
-        /*if (input < 20)
+
+        if (input < 20)
         {
             Debug.Log("Left");
-            rb.velocity = new Vector2(-1, rb.velocity.y) * movementSpeed;
+            rb.velocity = new Vector2(-movementSpeed, rb.velocity.y);
         }
         else
         {
             Debug.Log("Right");
-            rb.velocity = new Vector2(1, rb.velocity.y) * movementSpeed;
-        }*/
+            rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
+        }
 
 
         /// <summary>
@@ -96,17 +98,17 @@ public class MovePlayer : MonoBehaviour
         /// And then the further the hands is away from the sensor, the faster the player moves to the right side (till 24cm)
         /// </summary>
 
-        if (input <= 4)
+        /*if (input <= 4)
         {
             Debug.Log("Left");
-            rb.velocity = new Vector2(-CalculateInputValue(input), rb.velocity.y) * movementSpeed;
+            rb.velocity = new Vector2(-CalculateInputValue(input), rb.velocity.y);
         }
         else if (input <= 24 && input > 14)
         {
             Debug.Log("Right");
-            rb.velocity = new Vector2(input - 10, rb.velocity.y) * movementSpeed;
-        }
-        
+            rb.velocity = new Vector2((input - 14), rb.velocity.y);
+        }*/
+
     }
 
     int CalculateInputValue(int value)
@@ -117,6 +119,7 @@ public class MovePlayer : MonoBehaviour
 
     void Jump()
     {
+        Debug.Log("Jump");
         rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
         isGrounded = false;
     }
