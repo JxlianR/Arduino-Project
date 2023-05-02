@@ -12,7 +12,8 @@ public class MovePlayer : MonoBehaviour
     bool isStreaming = false;
 
     Rigidbody2D rb;
-    public float movementSpeed;
+
+    public float movementSpeed, jumpHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,10 @@ public class MovePlayer : MonoBehaviour
                 Debug.Log(value);
                 Move(value);
             }
+            else if (value == "Jump")
+            {
+                Jump();
+            }
         }
     }
 
@@ -66,12 +71,12 @@ public class MovePlayer : MonoBehaviour
         /*if (input < 20)
         {
             Debug.Log("Left");
-            rb.velocity = new Vector2(-1, 0) * movementSpeed;
+            rb.velocity = new Vector2(-1, rb.velocity.y) * movementSpeed;
         }
         else
         {
             Debug.Log("Right");
-            rb.velocity = new Vector2(1, 0) * movementSpeed;
+            rb.velocity = new Vector2(1, rb.velocity.y) * movementSpeed;
         }*/
 
 
@@ -99,6 +104,11 @@ public class MovePlayer : MonoBehaviour
     {
         int x = Math.Abs(value - 4 - 10);
         return x;
+    }
+
+    void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
     }
 
     /* 0 = 10

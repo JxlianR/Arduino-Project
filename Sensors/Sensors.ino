@@ -31,6 +31,9 @@ void loop() {
   if (distance <= 150){
     Serial.println(distance);
   }
+  else{
+    Serial.printl("Jump");
+  }
   delay(100);
 
   // Change led:
