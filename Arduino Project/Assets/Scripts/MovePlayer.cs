@@ -24,6 +24,9 @@ public class MovePlayer : MonoBehaviour
 
     public LightSensor light;
 
+    bool powerUpAvailable;
+    GameObject nearPowerUp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +50,9 @@ public class MovePlayer : MonoBehaviour
             {
                 Debug.Log(value);
 
-                if (value == "LightsOn")
+                if (value == "Power-Up" && powerUpAvailable == true)
+                    PickUpPowerUp();
+                else if (value == "LightsOn")
                     light.TurnOnLights();
 
                 int input = Int32.Parse(value);
@@ -131,6 +136,13 @@ public class MovePlayer : MonoBehaviour
         isGrounded = false;
     }
 
+    void PickUpPowerUp()
+    {
+        nearPowerUp.GetComponent<PowerUp>().ApplyEffect();
+        nearPowerUp = null;
+        powerUpAvailable = false;
+    }
+
     /* 0 = 10
      * 1 = 9
      * 2 = 8
@@ -169,6 +181,24 @@ public class MovePlayer : MonoBehaviour
         catch (TimeoutException)
         {
             return null;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Power-UP")
+        {
+            powerUpAvailable = true;
+            nearPowerUp = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Power-UP")
+        {
+            powerUpAvailable = false;
+            nearPowerUp = null;
         }
     }
 }

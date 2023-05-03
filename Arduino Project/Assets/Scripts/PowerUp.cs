@@ -21,10 +21,11 @@ public class PowerUp : MonoBehaviour
         
     }
 
-    void ApplyEffect()
+    public void ApplyEffect()
     {
         float oldValue = spawner.spawnInterval;
         spawner.spawnInterval = newSpawnInterval;
+        gameObject.SetActive(false);
         StartCoroutine(CancelEffect(oldValue));
     }
 
@@ -32,5 +33,6 @@ public class PowerUp : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         spawner.spawnInterval = oldValue;
+        Destroy(gameObject);
     }
 }
