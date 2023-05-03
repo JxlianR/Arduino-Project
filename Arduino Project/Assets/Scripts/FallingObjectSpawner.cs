@@ -10,6 +10,9 @@ public class FallingObjectSpawner : MonoBehaviour
     public float minVerticalSpeed = -5f;
     public float maxVerticalSpeed = -10f;
 
+    public GameObject[] powerUpPrefabs;
+    public int powerUpChance;
+
     private Camera mainCamera;
 
     private void Start()
@@ -25,6 +28,26 @@ public class FallingObjectSpawner : MonoBehaviour
 
     private void SpawnObjects()
     {
+        // Chance of spawning a Power-Up
+        if (Random.Range(0, 100) < powerUpChance)
+        {
+            GameObject powerUp = powerUpPrefabs[Random.Range(0, powerUpPrefabs.Length)];
+
+            float spawnX = Random.Range(mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x, mainCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x);
+
+            Vector3 spawnPosition = new Vector3(spawnX, mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + spawnHeight, 0f);
+
+            GameObject spawnedObject = Instantiate(powerUp, spawnPosition, Quaternion.identity);
+
+            Rigidbody2D rb = spawnedObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                float verticalSpeed = Random.Range(minVerticalSpeed, maxVerticalSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, verticalSpeed / 2);
+            }
+        }
+
+        //Spawning obstacle objects
         int numObjectsToSpawn = Random.Range(minObjectsPerSpawn, maxObjectsPerSpawn + 1);
 
         for (int i = 0; i < numObjectsToSpawn; i++)

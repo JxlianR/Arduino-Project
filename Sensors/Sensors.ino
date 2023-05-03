@@ -7,7 +7,7 @@ long duration;
 int photoresistor = A1;
 
 int input;
-//int ledPin = 5;
+int ledPin = 5;
 bool LED = false;
 
 void setup() {
@@ -30,7 +30,7 @@ void loop() {
   duration = pulseIn(Echo_EingangsPin, HIGH);
   distance = duration / 58.2;
 
-  //Serial.println(distance);
+  Serial.println(distance);
 
   int val = analogRead(photoresistor);
   float voltage = val * (5.0/1023) * 1000;

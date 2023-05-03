@@ -20,7 +20,7 @@ public class LightSensor : MonoBehaviour
     {
         isStreaming = true;
         sp.ReadTimeout = 100;
-        sp.Open();
+        //sp.Open();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(ChangeLights());
@@ -29,7 +29,7 @@ public class LightSensor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isStreaming)
+        /*if (isStreaming)
         {
             string value = ReadSerialPort();
             if (lightsOut == true && value == "LightsOn")
@@ -37,11 +37,13 @@ public class LightSensor : MonoBehaviour
                 Debug.Log(value);
                 TurnOnLights();
             }
-        }
+        }*/
     }
 
-    void TurnOnLights()
+    public void TurnOnLights()
     {
+        if (lightsOut == false) return;
+
         spriteRenderer.enabled = false;
         lightsOut = false;
         StartCoroutine(ChangeLights());

@@ -22,6 +22,8 @@ public class MovePlayer : MonoBehaviour
     public LayerMask groundLayer;
     public float jumpHeight;
 
+    public LightSensor light;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +46,12 @@ public class MovePlayer : MonoBehaviour
             if (value != null)
             {
                 Debug.Log(value);
+
+                if (value == "LightsOn")
+                    light.TurnOnLights();
+
                 int input = Int32.Parse(value);
+
                 if (input <= 40)
                     Move(input);
                 else if (isGrounded == true)

@@ -11,6 +11,9 @@ public class Arduino : MonoBehaviour
     bool isStreaming = false;
     bool ledOn = false;
 
+    //public MovePlayer player;
+    //public LightSensor lightSensor;
+
     // Start is called before the first frame update
     void Start()
     {
