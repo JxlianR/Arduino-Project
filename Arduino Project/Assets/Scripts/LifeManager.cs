@@ -5,13 +5,16 @@ public class LifeManager : MonoBehaviour
 {
     public int maxLives = 3;
     public int currentLives;
-    public GameObject gameOverAsset;
-    public Text livesText; 
+    public GameObject gameoverObject;
+    public Text gameoverText;
+    public Button retryButton;
+    public Text livesText;
 
     private void Start()
     {
         currentLives = maxLives;
-        UpdateLivesText(); 
+        UpdateLivesText();
+        HideGameover();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -26,7 +29,7 @@ public class LifeManager : MonoBehaviour
     {
         currentLives -= amount;
 
-        UpdateLivesText(); 
+        UpdateLivesText();
 
         if (currentLives <= 0)
         {
@@ -36,12 +39,14 @@ public class LifeManager : MonoBehaviour
 
     private void GameOver()
     {
-        if (gameOverAsset != null)
-        {
-            gameOverAsset.SetActive(true);
-        }
+        gameoverObject.SetActive(true);
+        Time.timeScale = 0f;
+    }
 
-        Destroy(this);
+    public void Retry()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     private void UpdateLivesText()
@@ -49,6 +54,14 @@ public class LifeManager : MonoBehaviour
         if (livesText != null)
         {
             livesText.text = "Lives: " + currentLives.ToString();
+        }
+    }
+
+    private void HideGameover()
+    {
+        if (gameoverObject != null)
+        {
+            gameoverObject.SetActive(false);
         }
     }
 }
