@@ -31,44 +31,66 @@ public class FallingObjectSpawner : MonoBehaviour
         // Chance of spawning a Power-Up
         if (Random.Range(0, 100) < powerUpChance)
         {
-            GameObject powerUp = powerUpPrefabs[Random.Range(0, powerUpPrefabs.Length)];
-
-            float spawnX = Random.Range(mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x, mainCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x);
-
-            Vector3 spawnPosition = new Vector3(spawnX, mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + spawnHeight, 0f);
-
-            GameObject spawnedObject = Instantiate(powerUp, spawnPosition, Quaternion.identity);
-
-            Rigidbody2D rb = spawnedObject.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                float verticalSpeed = Random.Range(minVerticalSpeed, maxVerticalSpeed);
-                rb.velocity = new Vector2(rb.velocity.x, verticalSpeed / 2);
-            }
+            GameObject powerUpPrefab = powerUpPrefabs[Random.Range(0, powerUpPrefabs.Length)];
+            SpawnObject(powerUpPrefab, true);
         }
-
-        //Spawning obstacle objects
-        int numObjectsToSpawn = Random.Range(minObjectsPerSpawn, maxObjectsPerSpawn + 1);
-
-        for (int i = 0; i < numObjectsToSpawn; i++)
+        else
         {
-            GameObject objectPrefab = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
+            // Spawning obstacle objects
+            int numObjectsToSpawn = Random.Range(minObjectsPerSpawn, maxObjectsPerSpawn + 1);
 
-            float spawnX = Random.Range(mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x, mainCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x);
-
-            Vector3 spawnPosition = new Vector3(spawnX, mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + spawnHeight, 0f);
-
-            GameObject spawnedObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
-
-            Rigidbody2D rb = spawnedObject.GetComponent<Rigidbody2D>();
-            if (rb != null)
+            for (int i = 0; i < numObjectsToSpawn; i++)
             {
-                float verticalSpeed = Random.Range(minVerticalSpeed, maxVerticalSpeed);
-                rb.velocity = new Vector2(rb.velocity.x, verticalSpeed);
+                GameObject objectPrefab = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
+                SpawnObject(objectPrefab, false);
             }
-
-            DestroyOnGround destroyScript = spawnedObject.AddComponent<DestroyOnGround>();
-            destroyScript.groundY = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
         }
+    }
+
+    private void SpawnObject(GameObject prefab, bool isPowerUp)
+    {
+        float spawnX = Random.Range(mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x, mainCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x);
+        Vector3 spawnPosition = new Vector3(spawnX, mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + spawnHeight, 0f);
+
+        GameObject spawnedObject = Instantiate(prefab, spawnPosition, Quaternion.identity);
+
+        Rigidbody2D rb = spawnedObject.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            float verticalSpeed = Random.Range(minVerticalSpeed, maxVerticalSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, verticalSpeed);
+        }
+
+        DestroyOnGround destroyScript = spawnedObject.AddComponent<DestroyOnGround>();
+        destroyScript.groundY = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
+
+        if (isPowerUp)
+        {
+            MakePickupable(spawnedObject);
+        }
+    }
+
+    private void MakePickupable(GameObject obj)
+    {
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            rb = obj.AddComponent<Rigidbody2D>();
+        }
+
+        CircleCollider2D collider = obj.GetComponent<CircleCollider2D>();
+        if (collider == null)
+        {
+            collider = obj.AddComponent<CircleCollider2D>();
+        }
+
+        // Add the PowerUpPickup script if not already attached
+        PowerUpPickup pickupScript = obj.GetComponent<PowerUpPickup>();
+        if (pickupScript == null)
+        {
+            pickupScript = obj.AddComponent<PowerUpPickup>();
+        }
+
+        
     }
 }
