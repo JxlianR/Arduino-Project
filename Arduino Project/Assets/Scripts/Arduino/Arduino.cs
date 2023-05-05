@@ -11,8 +11,8 @@ public class Arduino : MonoBehaviour
     bool isStreaming = false;
     bool ledOn = false;
 
-    //public MovePlayer player;
-    //public LightSensor lightSensor;
+    Player player;
+    LightSensor lightSensor;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,9 @@ public class Arduino : MonoBehaviour
         isStreaming = true;
         sp.ReadTimeout = 100;
         sp.Open();
+
+        player = FindObjectOfType<Player>();
+        lightSensor = FindObjectOfType<LightSensor>();
     }
 
     // Update is called once per frame
@@ -28,14 +31,21 @@ public class Arduino : MonoBehaviour
         if (isStreaming)
         {
             string value = ReadSerialPort();
+            Debug.Log(value);
             if (value != null)
             {
-                Debug.Log(value);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SwitchLEDState();
+                switch (value)
+                {
+                    case "LightsOn":
+                        lightSensor.TurnOnLights();
+                        break;
+                    case "PickUpPowerUp":
+                        player.PickupPowerUp();
+                        break;
+                    default:
+                        player.Move(int.Parse(value));
+                        break;
+                }
             }
         }
     }

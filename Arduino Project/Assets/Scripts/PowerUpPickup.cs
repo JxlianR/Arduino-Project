@@ -11,9 +11,9 @@ public class PowerUpPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        /*if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
+            MovePlayer player = other.GetComponent<MovePlayer>();
             if (player != null)
             {
                 PowerUpPickup.PowerUpType randomPowerUpType = GetRandomPowerUpType();
@@ -23,10 +23,33 @@ public class PowerUpPickup : MonoBehaviour
 
                 Destroy(gameObject);
             }
+        }*/
+
+        if (other.tag == "Player")
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                player.nearPowerUp = this.gameObject;
+                player.powerUpAvailable = true;
+            }
         }
     }
 
-    private PowerUpPickup.PowerUpType GetRandomPowerUpType()
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                player.nearPowerUp = null;
+                player.powerUpAvailable = false;
+            }
+        }
+    }
+
+    public PowerUpPickup.PowerUpType GetRandomPowerUpType()
     {
         PowerUpPickup.PowerUpType[] powerUpTypes = (PowerUpPickup.PowerUpType[])System.Enum.GetValues(typeof(PowerUpPickup.PowerUpType));
         int randomIndex = Random.Range(0, powerUpTypes.Length);
