@@ -22,6 +22,7 @@ public class LifeManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             ReduceLives(1);
+            Destroy(collision.gameObject);
         }
     }
 

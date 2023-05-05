@@ -6,9 +6,6 @@ using System;
 
 public class LightSensor : MonoBehaviour
 {
-    SerialPort sp = new SerialPort("COM8", 9600);
-    bool isStreaming = false;
-
     bool lightsOut;
     public int alpha = 222;
     public int minSeconds, maxSeconds;
@@ -19,10 +16,6 @@ public class LightSensor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isStreaming = true;
-        sp.ReadTimeout = 100;
-        //sp.Open();
-
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         GameObject textObject = new GameObject("LightFeedback");
@@ -39,15 +32,7 @@ public class LightSensor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (isStreaming)
-        {
-            string value = ReadSerialPort();
-            if (lightsOut == true && value == "LightsOn")
-            {
-                Debug.Log(value);
-                TurnOnLights();
-            }
-        }*/
+
     }
 
     public void TurnOnLights()
@@ -77,26 +62,5 @@ public class LightSensor : MonoBehaviour
          yield return new WaitForSeconds(3f);
         textMesh.text = string.Empty;
 
-    }
-
-    void Close()
-    {
-        sp.Close();
-    }
-
-    string ReadSerialPort(int timeout = 50)
-    {
-        string message;
-        sp.ReadTimeout = timeout;
-
-        try
-        {
-            message = sp.ReadLine();
-            return message;
-        }
-        catch (TimeoutException)
-        {
-            return null;
-        }
     }
 }
