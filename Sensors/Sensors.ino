@@ -6,6 +6,9 @@ long duration;
 
 int photoresistor = A1;
 
+int Analog_Input = A2;
+int Digital_Input = 3;
+
 int input;
 int ledPin = 5;
 bool LED = false;
@@ -14,6 +17,10 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(Trigger_AusgangsPin, OUTPUT);
   pinMode(Echo_EingangsPin, INPUT);
+
+  pinMode(Analog_Input, INPUT);
+  pinMode(Digital_Input, INPUT);
+
   Serial.begin(9600);
 
   //LED:
@@ -41,7 +48,17 @@ void loop() {
   }
   delay(100);
 
-  
+
+  float Analog;
+  int Digital;
+
+  Analog = analogRead(Analog_Input) * (5.0 / 1023.0);
+  Digital = digitalRead(Digital_Input);
+
+  if (Digital == 1)
+  {
+    Serial.println("PickUpPowerUp");
+  }
 
   // Change led:
   /*delay(100);
