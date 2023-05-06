@@ -31,7 +31,7 @@ public class Arduino : MonoBehaviour
         if (isStreaming)
         {
             string value = ReadSerialPort();
-            Debug.Log(value);
+            //Debug.Log(value);
             if (value != null)
             {
                 switch (value)

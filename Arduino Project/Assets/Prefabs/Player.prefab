@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1238753079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerFeet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 232944733}
   - component: {fileID: 232944745}
   - component: {fileID: 232944746}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 4
+  powerMovementSpeed: 8
   playerFeet: {fileID: 1238753079}
   groundLayer:
     serializedVersion: 2
@@ -143,6 +144,13 @@ MonoBehaviour:
   jumpHeight: 9
   powerUpAvailable: 0
   nearPowerUp: {fileID: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  invincibilityAlpha: 100
 --- !u!50 &4472527340078735457
 Rigidbody2D:
   serializedVersion: 4

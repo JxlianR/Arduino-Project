@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b51dc3fb652a3341a52b20014a62a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplayer: 1
 --- !u!114 &439902865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1701,6 +1702,10 @@ PrefabInstance:
     - target: {fileID: 4472527340078735387, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472527340078735388, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
+      propertyPath: powerUpDuration
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4472527340078735390, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
       propertyPath: m_RootOrder

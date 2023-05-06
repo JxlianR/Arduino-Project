@@ -7,7 +7,10 @@ public class Score : MonoBehaviour
 {
     TMP_Text scoreText;
 
+    [HideInInspector]
+    public float multiplayer = 1;
     float score;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +22,7 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score += 1 * Time.deltaTime;
+        score += 1 * Time.deltaTime * multiplayer;
         scoreText.text = "Score: " + Mathf.Round(score).ToString();
     }
 }

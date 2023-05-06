@@ -10,8 +10,11 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    Score score;
+
     // Move variables
-    public float movementSpeed;
+    public float movementSpeed, powerMovementSpeed;
+    float normalMovementSpeed;
 
     // Jump variables
     bool isGrounded;
@@ -24,10 +27,19 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public GameObject nearPowerUp;
 
+    // Variables for making player invincible
+    public LayerMask playerLayer, obstacleLayer;
+    public float invincibilityAlpha;
+    SpriteRenderer spriteRenderer;
+
+    public float powerUpDuration;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        score = FindObjectOfType<Score>();
     }
 
     // Update is called once per frame
@@ -102,14 +114,18 @@ public class Player : MonoBehaviour
         {
             case PowerUpPickup.PowerUpType.SpeedBoost:
                 // Apply speed boost logic
+                normalMovementSpeed = movementSpeed;
+                movementSpeed = powerMovementSpeed;
                 Debug.Log("Player picked up Speed Boost!");
                 break;
             case PowerUpPickup.PowerUpType.Invincibility:
                 // Apply invincibility logic
+                Invincible();
                 Debug.Log("Player picked up Invincibility!");
                 break;
             case PowerUpPickup.PowerUpType.ScoreMultiplier:
                 // Apply score multiplier logic
+                score.multiplayer = 2;
                 Debug.Log("Player picked up Score Multiplier!");
                 break;
             default:
@@ -118,7 +134,52 @@ public class Player : MonoBehaviour
                 break;
         }
 
+        StartCoroutine(CancelPowerUpEffect(powerUpType));
         powerUpAvailable = false;
+        Destroy(nearPowerUp.gameObject);
+    }
+
+    void Invincible()
+    {
+        Physics2D.IgnoreLayerCollision(playerLayer, obstacleLayer, true);
+        Color newColor = spriteRenderer.color;
+        newColor.a = invincibilityAlpha;
+        spriteRenderer.color = newColor;
+    }
+
+    void CancelInvincibility()
+    {
+        Physics2D.IgnoreLayerCollision(playerLayer, obstacleLayer, false);
+        Color newColor = spriteRenderer.color;
+        newColor.a = 255;
+        spriteRenderer.color = newColor;
+    }
+
+    IEnumerator CancelPowerUpEffect(PowerUpPickup.PowerUpType powerUpType)
+    {
+        yield return new WaitForSeconds(powerUpDuration);
+
+        switch (powerUpType)
+        {
+            case PowerUpPickup.PowerUpType.SpeedBoost:
+                // Apply speed boost logic
+                movementSpeed = normalMovementSpeed;
+                Debug.Log("Speed Boost expired!");
+                break;
+            case PowerUpPickup.PowerUpType.Invincibility:
+                CancelInvincibility();
+                Debug.Log("Invincibility expired!");
+                break;
+            case PowerUpPickup.PowerUpType.ScoreMultiplier:
+                // Apply score multiplier logic
+                score.multiplayer = 1;
+                Debug.Log("Score Multiplier expired!");
+                break;
+            default:
+                // Handle unrecognized power-up type
+                Debug.LogWarning("Unrecognized power-up type!");
+                break;
+        }
     }
 
     /* 0 = 10
