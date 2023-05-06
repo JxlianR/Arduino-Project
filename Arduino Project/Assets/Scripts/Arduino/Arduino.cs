@@ -76,4 +76,9 @@ public class Arduino : MonoBehaviour
             return null;
         }
     }
+
+    public void WriteLine(string value)
+    {
+        sp.WriteLine(value);
+    }
 }

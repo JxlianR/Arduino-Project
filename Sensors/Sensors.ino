@@ -9,6 +9,9 @@ int photoresistor = A1;
 int Analog_Input = A2;
 int Digital_Input = 3;
 
+int Led_Red = 12;
+int Led_Green = 11;
+
 int input;
 int ledPin = 5;
 bool LED = false;
@@ -20,6 +23,9 @@ void setup() {
 
   pinMode(Analog_Input, INPUT);
   pinMode(Digital_Input, INPUT);
+
+  pinMode(Led_Red, OUTPUT);
+  pinMode(Led_Green, OUTPUT);
 
   Serial.begin(9600);
 
@@ -46,7 +52,6 @@ void loop() {
   {
     Serial.println("LightsOn");
   }
-  delay(100);
 
 
   float Analog;
@@ -60,11 +65,22 @@ void loop() {
     Serial.println("PickUpPowerUp");
   }
 
+  delay(100);
+
   // Change led:
-  /*delay(100);
+  delay(100);
   if(Serial.available()>0)
   {
       input = Serial.read();
-      digitalWrite(ledPin, input);
-  }*/
+      if (input == "Green")
+      {
+        digitalWrite(Led_Red, LOW);
+        digitalWrite(Led_Green, HIGH);
+      }
+      else if (input == "Red")
+      {
+        digitalWrite(Led_Red, High);
+        digitalWrite(Led_Green, LOW);
+      }
+  }
 }
