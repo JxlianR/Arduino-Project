@@ -1582,7 +1582,7 @@ MonoBehaviour:
   maxVerticalSpeed: -10
   powerUpPrefabs:
   - {fileID: 2668768624316625022, guid: 6e757120a1019ee4abecee3a44263852, type: 3}
-  powerUpChance: 10
+  powerUpChance: 100
 --- !u!4 &1913960635
 Transform:
   m_ObjectHideFlags: 0

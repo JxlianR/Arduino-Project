@@ -9,12 +9,12 @@ public class PowerUpPickup : MonoBehaviour
         ScoreMultiplier
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        /*if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
-            MovePlayer player = other.GetComponent<MovePlayer>();
-            if (player != null)
+            Player player = other.gameObject.GetComponent<Player>();
+            if (player != null && player.storedPowerUp == null)
             {
                 PowerUpPickup.PowerUpType randomPowerUpType = GetRandomPowerUpType();
                 player.PickupPowerUp(randomPowerUpType);
@@ -23,31 +23,31 @@ public class PowerUpPickup : MonoBehaviour
 
                 Destroy(gameObject);
             }
-        }*/
+        }
 
-        if (other.tag == "Player")
+        /*if (other.tag == "Player")
         {
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                player.nearPowerUp = this.gameObject;
+                player.storedPowerUp = this.gameObject;
                 player.powerUpAvailable = true;
             }
-        }
+        }*/
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    /*private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                player.nearPowerUp = null;
+                player.storedPowerUp = null;
                 player.powerUpAvailable = false;
             }
         }
-    }
+    }*/
 
     public PowerUpPickup.PowerUpType GetRandomPowerUpType()
     {

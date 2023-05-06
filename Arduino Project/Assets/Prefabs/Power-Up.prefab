@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3341286635397016968}
   - component: {fileID: 5587742343750676067}
   - component: {fileID: 3223706112309148307}
-  - component: {fileID: 1221036657106354623}
   m_Layer: 7
   m_Name: Power-Up
   m_TagString: Power-Up
@@ -124,19 +123,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &1221036657106354623
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2668768624316625022}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.28

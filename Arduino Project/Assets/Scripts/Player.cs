@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool powerUpAvailable;
     [HideInInspector]
-    public GameObject nearPowerUp;
+    public GameObject storedPowerUp;
 
     // Variables for making player invincible
     public LayerMask playerLayer, obstacleLayer;
@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     public float powerUpDuration;
+    PowerUpPickup.PowerUpType powerUpType;
 
     // Start is called before the first frame update
     void Start()
@@ -103,40 +104,43 @@ public class Player : MonoBehaviour
         isGrounded = false;
     }
 
-    public void PickupPowerUp()
+    public void PickupPowerUp(PowerUpPickup.PowerUpType powerUpType)
     {
-        if (!powerUpAvailable) return;
+        this.powerUpType = powerUpType;
+    }
 
-        PowerUpPickup.PowerUpType powerUpType = nearPowerUp.GetComponent<PowerUpPickup>().GetRandomPowerUpType();
-
+    public void ActivatePowerUp()
+    {
         // Handle the power-up logic based on the powerUpType
-        switch (powerUpType)
+        if (powerUpAvailable == true)
         {
-            case PowerUpPickup.PowerUpType.SpeedBoost:
-                // Apply speed boost logic
-                normalMovementSpeed = movementSpeed;
-                movementSpeed = powerMovementSpeed;
-                Debug.Log("Player picked up Speed Boost!");
-                break;
-            case PowerUpPickup.PowerUpType.Invincibility:
-                // Apply invincibility logic
-                Invincible();
-                Debug.Log("Player picked up Invincibility!");
-                break;
-            case PowerUpPickup.PowerUpType.ScoreMultiplier:
-                // Apply score multiplier logic
-                score.multiplayer = 2;
-                Debug.Log("Player picked up Score Multiplier!");
-                break;
-            default:
-                // Handle unrecognized power-up type
-                Debug.LogWarning("Unrecognized power-up type!");
-                break;
-        }
+            switch (powerUpType)
+            {
+                case PowerUpPickup.PowerUpType.SpeedBoost:
+                    // Apply speed boost logic
+                    normalMovementSpeed = movementSpeed;
+                    movementSpeed = powerMovementSpeed;
+                    Debug.Log("Player picked up Speed Boost!");
+                    break;
+                case PowerUpPickup.PowerUpType.Invincibility:
+                    // Apply invincibility logic
+                    Invincible();
+                    Debug.Log("Player picked up Invincibility!");
+                    break;
+                case PowerUpPickup.PowerUpType.ScoreMultiplier:
+                    // Apply score multiplier logic
+                    score.multiplayer = 2;
+                    Debug.Log("Player picked up Score Multiplier!");
+                    break;
+                default:
+                    // Handle unrecognized power-up type
+                    Debug.LogWarning("Unrecognized power-up type!");
+                    break;
+            }
 
-        StartCoroutine(CancelPowerUpEffect(powerUpType));
-        powerUpAvailable = false;
-        Destroy(nearPowerUp.gameObject);
+            StartCoroutine(CancelPowerUpEffect(powerUpType));
+            powerUpAvailable = false;
+        }
     }
 
     void Invincible()

@@ -40,7 +40,7 @@ public class Arduino : MonoBehaviour
                         lightSensor.TurnOnLights();
                         break;
                     case "PickUpPowerUp":
-                        player.PickupPowerUp();
+                        player.ActivatePowerUp();
                         break;
                     default:
                         player.Move(int.Parse(value));
