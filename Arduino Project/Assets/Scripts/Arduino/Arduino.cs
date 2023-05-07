@@ -80,5 +80,6 @@ public class Arduino : MonoBehaviour
     public void WriteLine(string value)
     {
         sp.WriteLine(value);
+        Debug.Log("WriteLine called");
     }
 }

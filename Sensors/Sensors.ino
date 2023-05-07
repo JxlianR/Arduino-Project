@@ -12,9 +12,13 @@ int Digital_Input = 3;
 int Led_Red = 12;
 int Led_Green = 11;
 
-int input;
+int Buzzer = 13;
+
+int incomingByte[2];
+
+String input;
 int ledPin = 5;
-bool LED = false;
+bool GreenLED = true;
 
 void setup() {
   // put your setup code here, to run once:
@@ -26,6 +30,10 @@ void setup() {
 
   pinMode(Led_Red, OUTPUT);
   pinMode(Led_Green, OUTPUT);
+  digitalWrite(Led_Red, LOW);
+  digitalWrite(Led_Green, HIGH);
+
+  pinMode(Buzzer, OUTPUT);
 
   Serial.begin(9600);
 
@@ -68,19 +76,43 @@ void loop() {
   delay(100);
 
   // Change led:
-  delay(100);
-  if(Serial.available()>0)
+  if(Serial.available() > 0)
   {
-      input = Serial.read();
-      if (input == "Green")
-      {
-        digitalWrite(Led_Red, LOW);
-        digitalWrite(Led_Green, HIGH);
+    while (Serial.peek() == 'L')
+    {
+      Serial.read();
+      incomingByte[0] = Serial.parseInt();
+
+      if (incomingByte[0] == 1){
+        GreenLED = true;
+        ledCheck();
       }
-      else if (input == "Red")
-      {
-        digitalWrite(Led_Red, High);
-        digitalWrite(Led_Green, LOW);
+      else if (incomingByte[0] == 0){
+        GreenLED = false;
+        ledCheck();
       }
+    }
+  }
+}
+
+void ledCheck()
+{
+  if(GreenLED == true)
+  {
+    digitalWrite(Led_Red, LOW);
+    digitalWrite(Led_Green, HIGH);
+
+    /*digitalWrite(Buzzer, HIGH);
+    delay(10);
+    digitalWrite(Buzzer, LOW);*/
+  }
+  else if (GreenLED == false)
+  {
+    digitalWrite(Led_Green, LOW);
+    digitalWrite(Led_Red, HIGH);
+
+    /*digitalWrite(Buzzer, HIGH);
+    delay(10);
+    digitalWrite(Buzzer, LOW);*/
   }
 }

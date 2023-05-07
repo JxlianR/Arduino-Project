@@ -14,8 +14,8 @@ public class LedSwitch : MonoBehaviour
     void Start()
     {
         arduino = FindObjectOfType<Arduino>();
-        greenLedOn = false;
-        arduino.WriteLine("Red");
+        greenLedOn = true;
+        //arduino.WriteLine("Red");
         StartSwitching();
     }
 
@@ -27,20 +27,28 @@ public class LedSwitch : MonoBehaviour
 
     void StartSwitching()
     {
-        InvokeRepeating("SwitchLed", 0f, Random.Range(minTime, maxTime));
+        //InvokeRepeating("SwitchLed", 0f, Random.Range(minTime, maxTime));
+        StartCoroutine(SwitchLed());
     }
 
-    void SwitchLed()
+    IEnumerator SwitchLed()
     {
+        Debug.Log("SwitchLed Called");
+
         if (greenLedOn == true)
         {
-            arduino.WriteLine("Red");
+            Debug.Log("Switched to Red");
+            arduino.WriteLine("L" + "0");
             greenLedOn = false;
         }
         else
         {
-            arduino.WriteLine("Green");
+            Debug.Log("Switched to Green");
+            arduino.WriteLine("L" + "1");
             greenLedOn = true;
         }
+
+        yield return new WaitForSeconds(Random.Range(minTime, maxTime));
+        StartCoroutine(SwitchLed());
     }
 }
