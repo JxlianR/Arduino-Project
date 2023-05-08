@@ -53,7 +53,7 @@ public class Arduino : MonoBehaviour
     void SwitchLEDState()
     {
         ledOn = !ledOn;
-        sp.WriteLine((ledOn ? "L" : "H"));
+        sp.WriteLine((ledOn ? "2" : "1"));
     }
 
     void Close()

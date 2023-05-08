@@ -1628,7 +1628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minTime: 2
-  maxTime: 6
+  maxTime: 15
 --- !u!4 &2064298631
 Transform:
   m_ObjectHideFlags: 0

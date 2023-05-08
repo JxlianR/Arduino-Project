@@ -16,7 +16,7 @@ int Buzzer = 13;
 
 int incomingByte[2];
 
-String input;
+int input;
 int ledPin = 5;
 bool GreenLED = true;
 
@@ -31,7 +31,7 @@ void setup() {
   pinMode(Led_Red, OUTPUT);
   pinMode(Led_Green, OUTPUT);
   digitalWrite(Led_Red, LOW);
-  digitalWrite(Led_Green, HIGH);
+  digitalWrite(Led_Green, LOW);
 
   pinMode(Buzzer, OUTPUT);
 
@@ -44,6 +44,8 @@ void setup() {
 
 void loop() {
   
+  delay(100);
+
   digitalWrite(Trigger_AusgangsPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(Trigger_AusgangsPin, LOW);
@@ -73,46 +75,33 @@ void loop() {
     Serial.println("PickUpPowerUp");
   }
 
-  delay(100);
-
   // Change led:
   if(Serial.available() > 0)
   {
-    while (Serial.peek() == 'L')
-    {
-      Serial.read();
-      incomingByte[0] = Serial.parseInt();
-
-      if (incomingByte[0] == 1){
-        GreenLED = true;
-        ledCheck();
-      }
-      else if (incomingByte[0] == 0){
-        GreenLED = false;
-        ledCheck();
-      }
+    input = Serial.parseInt();
+    if (input == 1){
+      LedGreen();
+    }
+    else if (input == 2){
+      LedRed();
     }
   }
 }
 
-void ledCheck()
+void LedGreen()
 {
-  if(GreenLED == true)
-  {
-    digitalWrite(Led_Red, LOW);
-    digitalWrite(Led_Green, HIGH);
+  digitalWrite(Led_Red, LOW);
+  digitalWrite(Led_Green, HIGH);
+  digitalWrite(Buzzer, HIGH);
+  delay(10);
+  digitalWrite(Buzzer, LOW);
+}
 
-    /*digitalWrite(Buzzer, HIGH);
-    delay(10);
-    digitalWrite(Buzzer, LOW);*/
-  }
-  else if (GreenLED == false)
-  {
-    digitalWrite(Led_Green, LOW);
-    digitalWrite(Led_Red, HIGH);
-
-    /*digitalWrite(Buzzer, HIGH);
-    delay(10);
-    digitalWrite(Buzzer, LOW);*/
-  }
+void LedRed()
+{
+  digitalWrite(Led_Green, LOW);
+  digitalWrite(Led_Red, HIGH);
+  digitalWrite(Buzzer, HIGH);
+  delay(10);
+  digitalWrite(Buzzer, LOW);
 }
