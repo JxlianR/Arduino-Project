@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.1f, groundLayer);
+        //isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.1f, groundLayer);
     }
 
     public void Move(int input)
@@ -67,8 +67,8 @@ public class Player : MonoBehaviour
             Debug.Log("Right");
             rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
         }
-        else if (isGrounded)
-            Jump();
+        //else if (isGrounded)
+            //Jump();
 
 
         /// <summary>
