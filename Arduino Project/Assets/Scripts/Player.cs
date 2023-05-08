@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     Score score;
 
     // Move variables
-    public float movementSpeed, powerMovementSpeed;
+    public float movementSpeed, speedBoost;
     float normalMovementSpeed;
 
     // Variables for making player invincible
@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
     PowerUpPickup.PowerUpType powerUpType;
     public Text powerUpText;
     public LedSwitch led;
+
+    [HideInInspector]
+    public bool invincible;
 
     
     // Start is called before the first frame update
@@ -53,12 +56,12 @@ public class Player : MonoBehaviour
         /// if the hand is further away, the player moves to the right side
         /// </summary>
 
-        if (input < 20)
+        if (input < 15)
         {
             Debug.Log("Left");
             rb.velocity = new Vector2(-movementSpeed, rb.velocity.y);
         }
-        else if (input <= 40)
+        else if (input <= 30)
         {
             Debug.Log("Right");
             rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
@@ -107,8 +110,7 @@ public class Player : MonoBehaviour
             {
                 case PowerUpPickup.PowerUpType.SpeedBoost:
                     // Apply speed boost logic
-                    normalMovementSpeed = movementSpeed;
-                    movementSpeed = powerMovementSpeed;
+                    movementSpeed += speedBoost;
                     Debug.Log("Player picked up Speed Boost!");
                     break;
                 case PowerUpPickup.PowerUpType.Invincibility:
@@ -137,7 +139,8 @@ public class Player : MonoBehaviour
 
     void Invincible()
     {
-        Physics2D.IgnoreLayerCollision(playerLayer, obstacleLayer, true);
+        invincible = true;
+        Physics2D.IgnoreLayerCollision(6, 7, true);
         Color newColor = spriteRenderer.color;
         newColor.a = invincibilityAlpha;
         spriteRenderer.color = newColor;
@@ -145,7 +148,8 @@ public class Player : MonoBehaviour
 
     void CancelInvincibility()
     {
-        Physics2D.IgnoreLayerCollision(playerLayer, obstacleLayer, false);
+        invincible = false;
+        Physics2D.IgnoreLayerCollision(6, 7, false);
         Color newColor = spriteRenderer.color;
         newColor.a = 255;
         spriteRenderer.color = newColor;
@@ -159,7 +163,7 @@ public class Player : MonoBehaviour
         {
             case PowerUpPickup.PowerUpType.SpeedBoost:
                 // Apply speed boost logic
-                movementSpeed = normalMovementSpeed;
+                movementSpeed -= speedBoost;
                 Debug.Log("Speed Boost expired!");
                 break;
             case PowerUpPickup.PowerUpType.Invincibility:

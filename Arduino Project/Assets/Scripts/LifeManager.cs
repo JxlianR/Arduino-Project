@@ -21,7 +21,7 @@ public class LifeManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle") && gameObject.GetComponent<Player>().invincible == false)
         {
             ReduceLives(1);
             Destroy(collision.gameObject);

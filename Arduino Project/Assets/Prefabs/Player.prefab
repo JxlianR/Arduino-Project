@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,17 +103,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaa70d4bdfb7db41b806b3189b5284e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
-  powerMovementSpeed: 8
+  movementSpeed: 5
+  speedBoost: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
-  invincibilityAlpha: 100
+  invincibilityAlpha: 60
   powerUpAvailable: 0
-  powerUpDuration: 5
+  powerUpDuration: 8
   powerUpText: {fileID: 0}
   led: {fileID: 0}
 --- !u!50 &4472527340078735457
