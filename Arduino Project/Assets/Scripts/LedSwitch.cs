@@ -32,7 +32,7 @@ public class LedSwitch : MonoBehaviour
     IEnumerator SwitchLed()
     {
         greenLedOn = !greenLedOn;
-        arduino.WriteLine(greenLedOn ? "1" : "2");
+        arduino.WriteLine("L" + (greenLedOn ? "1" : "2"));
         yield return new WaitForSeconds(Random.Range(minTime, maxTime));
         StartCoroutine(SwitchLed());
     }

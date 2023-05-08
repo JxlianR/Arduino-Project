@@ -1559,7 +1559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1913960634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1582,7 +1582,7 @@ MonoBehaviour:
   maxVerticalSpeed: -10
   powerUpPrefabs:
   - {fileID: 2668768624316625022, guid: 6e757120a1019ee4abecee3a44263852, type: 3}
-  powerUpChance: 100
+  powerUpChance: 10
 --- !u!4 &1913960635
 Transform:
   m_ObjectHideFlags: 0
@@ -1614,7 +1614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2064298630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1797,6 +1797,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4472527340078735459, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
+      propertyPath: arduino
+      value: 
+      objectReference: {fileID: 1862458217}
     - target: {fileID: 4472527340078735459, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
       propertyPath: livesText
       value: 

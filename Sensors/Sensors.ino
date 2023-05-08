@@ -78,13 +78,33 @@ void loop() {
   // Change led:
   if(Serial.available() > 0)
   {
-    input = Serial.parseInt();
+    while(Serial.peek() == 'L'){
+      Serial.read();
+      incomingByte[0] = Serial.parseInt();
+
+      if (incomingByte[0] == 1){
+        LedGreen();
+      }
+      else if (incomingByte[0] == 2){
+        LedRed();
+      }
+    }
+
+    char Input = Serial.read();
+    if (Input == 'B'){
+      BuzzerSound();
+    }
+
+    /*input = Serial.parseInt();
     if (input == 1){
       LedGreen();
     }
     else if (input == 2){
       LedRed();
     }
+    else{
+      BuzzerSound();
+    }*/
   }
 }
 
@@ -92,15 +112,18 @@ void LedGreen()
 {
   digitalWrite(Led_Red, LOW);
   digitalWrite(Led_Green, HIGH);
-  digitalWrite(Buzzer, HIGH);
-  delay(10);
-  digitalWrite(Buzzer, LOW);
+  BuzzerSound();
 }
 
 void LedRed()
 {
   digitalWrite(Led_Green, LOW);
   digitalWrite(Led_Red, HIGH);
+  BuzzerSound();
+}
+
+void BuzzerSound()
+{
   digitalWrite(Buzzer, HIGH);
   delay(10);
   digitalWrite(Buzzer, LOW);

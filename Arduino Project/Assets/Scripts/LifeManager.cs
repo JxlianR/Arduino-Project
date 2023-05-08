@@ -10,6 +10,8 @@ public class LifeManager : MonoBehaviour
     public Button retryButton;
     public Text livesText;
 
+    public Arduino arduino;
+
     private void Start()
     {
         currentLives = maxLives;
@@ -28,6 +30,8 @@ public class LifeManager : MonoBehaviour
 
     private void ReduceLives(int amount)
     {
+        arduino.WriteLine("B");
+
         currentLives -= amount;
 
         UpdateLivesText();
@@ -40,6 +44,7 @@ public class LifeManager : MonoBehaviour
 
     private void GameOver()
     {
+        arduino.WriteLine("B");
         gameoverObject.SetActive(true);
         Time.timeScale = 0f;
     }
