@@ -14,7 +14,7 @@ public class PowerUpPickup : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Player player = other.gameObject.GetComponent<Player>();
-            if (player != null && player.storedPowerUp == null)
+            if (player != null && player.powerUpAvailable == false)
             {
                 PowerUpPickup.PowerUpType randomPowerUpType = GetRandomPowerUpType();
                 player.PickupPowerUp(randomPowerUpType);

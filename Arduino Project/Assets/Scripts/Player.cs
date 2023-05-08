@@ -22,18 +22,18 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     public float jumpHeight;
 
-    [HideInInspector]
-    public bool powerUpAvailable;
-    [HideInInspector]
-    public GameObject storedPowerUp;
-
     // Variables for making player invincible
     public LayerMask playerLayer, obstacleLayer;
     public float invincibilityAlpha;
     SpriteRenderer spriteRenderer;
 
+    // Powerup related Variables
+    [HideInInspector]
+    public bool powerUpAvailable;
     public float powerUpDuration;
     PowerUpPickup.PowerUpType powerUpType;
+
+    public LedSwitch led;
 
     // Start is called before the first frame update
     void Start()
@@ -107,12 +107,13 @@ public class Player : MonoBehaviour
     public void PickupPowerUp(PowerUpPickup.PowerUpType powerUpType)
     {
         this.powerUpType = powerUpType;
+        powerUpAvailable = true;
     }
 
     public void ActivatePowerUp()
     {
         // Handle the power-up logic based on the powerUpType
-        if (powerUpAvailable == true)
+        if (powerUpAvailable == true && led.greenLedOn == true)
         {
             switch (powerUpType)
             {

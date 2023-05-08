@@ -6,7 +6,8 @@ public class LedSwitch : MonoBehaviour
 {
     public float minTime, maxTime;
 
-    bool greenLedOn;
+    [HideInInspector]
+    public bool greenLedOn;
 
     Arduino arduino;
 
