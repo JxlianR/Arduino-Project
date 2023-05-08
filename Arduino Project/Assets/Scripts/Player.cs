@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     bool isGrounded;
     public Transform playerFeet;
     public LayerMask groundLayer;
-    public float jumpHeight;
 
     // Variables for making player invincible
     public LayerMask playerLayer, obstacleLayer;
@@ -97,13 +96,6 @@ public class Player : MonoBehaviour
     {
         int x = Math.Abs(value - 4 - 10);
         return x;
-    }
-
-    void Jump()
-    {
-        Debug.Log("Jump");
-        rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
-        isGrounded = false;
     }
 
     public void PickupPowerUp(PowerUpPickup.PowerUpType powerUpType)
