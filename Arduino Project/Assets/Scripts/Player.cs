@@ -17,11 +17,6 @@ public class Player : MonoBehaviour
     public float movementSpeed, powerMovementSpeed;
     float normalMovementSpeed;
 
-    // Jump variables
-    bool isGrounded;
-    public Transform playerFeet;
-    public LayerMask groundLayer;
-
     // Variables for making player invincible
     public LayerMask playerLayer, obstacleLayer;
     public float invincibilityAlpha;
@@ -68,8 +63,6 @@ public class Player : MonoBehaviour
             Debug.Log("Right");
             rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
         }
-        //else if (isGrounded)
-            //Jump();
 
 
         /// <summary>
@@ -103,8 +96,6 @@ public class Player : MonoBehaviour
         this.powerUpType = powerUpType;
         powerUpAvailable = true;
         powerUpText.text = powerUpType.ToString();
-
-
     }
 
     public void ActivatePowerUp()
@@ -186,42 +177,4 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-
-    /* 0 = 10
-     * 1 = 9
-     * 2 = 8
-     * 3 = 7
-     * 4 = 6
-     * 5 = 5
-     * 6 = 4
-     * 7 = 3
-     * 8 = 2
-     * 9 = 1
-     * 10 = 0
-     * 
-     *  value + x = 10
-     *  value - 10 = x
-     *  Math.Abs(x);
-     *  
-     *  x = inputValue
-     *  
-     */
-
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Power-UP")
-        {
-            powerUpAvailable = true;
-            nearPowerUp = collision.gameObject;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Power-UP")
-        {
-            powerUpAvailable = false;
-            nearPowerUp = null;
-        }
-    }*/
 }

@@ -7,7 +7,6 @@ using System;
 public class LightSensor : MonoBehaviour
 {
     bool lightsOut;
-    public int alpha = 222;
     public int minSeconds, maxSeconds;
 
     SpriteRenderer spriteRenderer;
@@ -24,7 +23,7 @@ public class LightSensor : MonoBehaviour
         textMesh = textObject.AddComponent<TextMesh>();
         textMesh.anchor = TextAnchor.MiddleCenter;
         textMesh.alignment = TextAlignment.Center;
-        textMesh.characterSize = 0.5f; 
+        textMesh.characterSize = 0.5f;
 
         StartCoroutine(ChangeLights());
     }

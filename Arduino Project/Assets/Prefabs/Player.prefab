@@ -137,13 +137,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4
   powerMovementSpeed: 8
-  playerFeet: {fileID: 1238753079}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  jumpHeight: 9
-  powerUpAvailable: 0
-  nearPowerUp: {fileID: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -151,6 +144,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   invincibilityAlpha: 100
+  powerUpAvailable: 0
+  powerUpDuration: 5
+  powerUpText: {fileID: 0}
+  led: {fileID: 0}
 --- !u!50 &4472527340078735457
 Rigidbody2D:
   serializedVersion: 4
@@ -216,6 +213,7 @@ MonoBehaviour:
   gameoverText: {fileID: 0}
   retryButton: {fileID: 0}
   livesText: {fileID: 0}
+  arduino: {fileID: 0}
 --- !u!114 &232944733
 MonoBehaviour:
   m_ObjectHideFlags: 0
