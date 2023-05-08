@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
+using UnityEngine.UI;
 
 using System;
 
@@ -32,9 +33,10 @@ public class Player : MonoBehaviour
     public bool powerUpAvailable;
     public float powerUpDuration;
     PowerUpPickup.PowerUpType powerUpType;
-
+    public Text powerUpText;
     public LedSwitch led;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -108,6 +110,9 @@ public class Player : MonoBehaviour
     {
         this.powerUpType = powerUpType;
         powerUpAvailable = true;
+        powerUpText.text = powerUpType.ToString();
+
+
     }
 
     public void ActivatePowerUp()
@@ -141,6 +146,9 @@ public class Player : MonoBehaviour
 
             StartCoroutine(CancelPowerUpEffect(powerUpType));
             powerUpAvailable = false;
+
+             // Clear the power-up text after activating
+             powerUpText.text = "";
         }
     }
 
