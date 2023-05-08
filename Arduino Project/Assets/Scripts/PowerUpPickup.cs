@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerUpPickup : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PowerUpPickup : MonoBehaviour
         Invincibility,
         ScoreMultiplier
     }
+
+    public Text powerUpNameText;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -20,6 +23,8 @@ public class PowerUpPickup : MonoBehaviour
                 player.PickupPowerUp(randomPowerUpType);
 
                 Debug.Log("Player picked up power-up: " + randomPowerUpType);
+                powerUpNameText.text = randomPowerUpType.ToString(); 
+            
 
                 Destroy(gameObject);
             }
