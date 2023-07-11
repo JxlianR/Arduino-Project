@@ -51,17 +51,17 @@ public class Player : MonoBehaviour
     public void Move(int input)
     {
         /// <summary>
-        /// Threshold of 20cm
+        /// Threshold of 15cm
         /// if the hand is closer than that, the player moves to the left side
         /// if the hand is further away, the player moves to the right side
         /// </summary>
 
-        if (input < 15)
+        if (input <= 15)
         {
             Debug.Log("Left");
             rb.velocity = new Vector2(-movementSpeed, rb.velocity.y);
         }
-        else if (input <= 30)
+        else if (input >= 16)
         {
             Debug.Log("Right");
             rb.velocity = new Vector2(movementSpeed, rb.velocity.y);

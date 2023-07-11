@@ -1,4 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FallingObjectSpawner : MonoBehaviour
 {
@@ -15,9 +18,15 @@ public class FallingObjectSpawner : MonoBehaviour
 
     private Camera mainCamera;
 
+    [SerializeField]
+    private GameObject warningUI;
+
+    Player player;
+
     private void Start()
     {
         mainCamera = Camera.main;
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
         StartSpawning();
     }
 
@@ -29,7 +38,7 @@ public class FallingObjectSpawner : MonoBehaviour
     private void SpawnObjects()
     {
         // Chance of spawning a Power-Up
-        if (Random.Range(0, 100) < powerUpChance)
+        if (Random.Range(0, 100) < powerUpChance && player.powerUpAvailable == false)
         {
             GameObject powerUpPrefab = powerUpPrefabs[Random.Range(0, powerUpPrefabs.Length)];
             SpawnObject(powerUpPrefab, true);
@@ -42,15 +51,20 @@ public class FallingObjectSpawner : MonoBehaviour
             for (int i = 0; i < numObjectsToSpawn; i++)
             {
                 GameObject objectPrefab = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
-                SpawnObject(objectPrefab, false);
+                StartCoroutine(SpawnObject(objectPrefab, false));
             }
         }
     }
 
-    private void SpawnObject(GameObject prefab, bool isPowerUp)
+    private IEnumerator SpawnObject(GameObject prefab, bool isPowerUp)
     {
         float spawnX = Random.Range(mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x, mainCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x);
         Vector3 spawnPosition = new Vector3(spawnX, mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + spawnHeight, 0f);
+
+        //Spawn Warning -> Where the obstacle will fall down
+        Vector3 spawnPos = new Vector3(spawnX, mainCamera.ViewportToWorldPoint(new Vector3(0, 0.93f, 0)).y, 0f);
+        GameObject ui = Instantiate(warningUI, spawnPos, Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
 
         GameObject spawnedObject = Instantiate(prefab, spawnPosition, Quaternion.identity);
 
@@ -68,6 +82,8 @@ public class FallingObjectSpawner : MonoBehaviour
         {
             MakePickupable(spawnedObject);
         }
+
+        Destroy(ui);
     }
 
     private void MakePickupable(GameObject obj)
@@ -90,7 +106,5 @@ public class FallingObjectSpawner : MonoBehaviour
         {
             pickupScript = obj.AddComponent<PowerUpPickup>();
         }
-
-        
     }
 }
