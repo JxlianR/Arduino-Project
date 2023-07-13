@@ -1902,7 +1902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 838010759710941370, guid: 8e2674aa6e4754682801eee736fa534a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.19
+      value: -4.25
       objectReference: {fileID: 0}
     - target: {fileID: 838010759710941370, guid: 8e2674aa6e4754682801eee736fa534a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1976,7 +1976,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 232944733, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 232944733, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
       propertyPath: groundCheck
@@ -1992,7 +1992,7 @@ PrefabInstance:
       objectReference: {fileID: 2064298630}
     - target: {fileID: 4472527340078735388, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4472527340078735388, guid: b5dc304a5c84d45f8adabcbd960fe52b, type: 3}
       propertyPath: powerUpText
