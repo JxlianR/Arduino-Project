@@ -34,6 +34,7 @@ void setup() {
   digitalWrite(Led_Green, LOW);
 
   pinMode(Buzzer, OUTPUT);
+  digitalWrite(Buzzer, LOW);
 
   Serial.begin(9600);
 
@@ -124,7 +125,19 @@ void LedRed()
 
 void BuzzerSound()
 {
+
   digitalWrite(Buzzer, HIGH);
   delay(10);
   digitalWrite(Buzzer, LOW);
+  //unsigned char i;
+  /*while (1)
+  {
+    for (i = 0; i < 50; i++) 
+    {
+      digitalWrite (Buzzer, HIGH) ;
+      delay (2) ;
+      digitalWrite (Buzzer, LOW) ;
+      delay (2) ;
+    }
+  }*/
 }

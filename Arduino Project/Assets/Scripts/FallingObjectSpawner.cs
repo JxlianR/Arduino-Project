@@ -41,7 +41,7 @@ public class FallingObjectSpawner : MonoBehaviour
         if (Random.Range(0, 100) < powerUpChance && player.powerUpAvailable == false)
         {
             GameObject powerUpPrefab = powerUpPrefabs[Random.Range(0, powerUpPrefabs.Length)];
-            SpawnObject(powerUpPrefab, true);
+            StartCoroutine(SpawnObject(powerUpPrefab, true));
         }
         else
         {

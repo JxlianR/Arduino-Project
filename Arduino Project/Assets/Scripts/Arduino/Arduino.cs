@@ -7,7 +7,7 @@ using System;
 
 public class Arduino : MonoBehaviour
 {
-    SerialPort sp = new SerialPort("COM8", 9600);
+    SerialPort sp = new SerialPort("COM5", 9600);
     bool isStreaming = false;
     bool ledOn = false;
 
