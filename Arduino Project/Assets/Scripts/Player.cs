@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         timeSurvived += Time.deltaTime;
+        movementSpeed += timeSurvived * 0.0005f;
+        Debug.Log(movementSpeed);
     }
 
     public void Move(int input)
@@ -59,12 +61,12 @@ public class Player : MonoBehaviour
         if (input <= 15)
         {
             Debug.Log("Left");
-            rb.velocity = new Vector2(-(movementSpeed + (timeSurvived * 0.05f)), rb.velocity.y);
+            rb.velocity = new Vector2(-movementSpeed, rb.velocity.y);
         }
         else if (input >= 16)
         {
             Debug.Log("Right");
-            rb.velocity = new Vector2(movementSpeed + (timeSurvived * 0.05f), rb.velocity.y);
+            rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
         }
 
 

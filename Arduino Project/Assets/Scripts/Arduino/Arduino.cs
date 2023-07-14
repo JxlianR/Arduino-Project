@@ -50,6 +50,11 @@ public class Arduino : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        Close();
+    }
+
     void SwitchLEDState()
     {
         ledOn = !ledOn;

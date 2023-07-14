@@ -14,7 +14,7 @@ public class FallingObjectSpawner : MonoBehaviour
     public float maxVerticalSpeed = -10f;
     public float speedIncreasePerInterval = 0.1f;
     public float sizeIncreasePerInterval = 0.025f;
-    public float spawnIntervalDecreaseRate = 0.01f;
+    public float spawnIntervalDecreaseRate = 0.001f;
 
     public GameObject[] powerUpPrefabs;
     public int powerUpChance;

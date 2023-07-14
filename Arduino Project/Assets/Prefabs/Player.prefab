@@ -15,8 +15,6 @@ GameObject:
   - component: {fileID: 4472527340078735458}
   - component: {fileID: 4472527340078735459}
   - component: {fileID: 232944733}
-  - component: {fileID: 232944745}
-  - component: {fileID: 232944746}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -116,6 +114,7 @@ MonoBehaviour:
   powerUpDuration: 8
   powerUpText: {fileID: 0}
   led: {fileID: 0}
+  invincible: 0
 --- !u!50 &4472527340078735457
 Rigidbody2D:
   serializedVersion: 4
@@ -180,7 +179,7 @@ MonoBehaviour:
   gameoverObject: {fileID: 0}
   gameoverText: {fileID: 0}
   retryButton: {fileID: 0}
-  livesText: {fileID: 0}
+  hearts: []
   arduino: {fileID: 0}
 --- !u!114 &232944733
 MonoBehaviour:
@@ -200,27 +199,3 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &232944745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4472527340078735387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 993f22e96f51541908484a9ed72aae04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &232944746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4472527340078735387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e31d12ab61094b81be2371cd0ef1d89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
