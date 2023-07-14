@@ -8,14 +8,14 @@ public class LifeManager : MonoBehaviour
     public GameObject gameoverObject;
     public Text gameoverText;
     public Button retryButton;
-    public Text livesText;
+    public Image[] hearts;
 
     public Arduino arduino;
 
     private void Start()
     {
         currentLives = maxLives;
-        UpdateLivesText();
+        UpdateLiveImages(currentLives);
         HideGameover();
     }
 
@@ -34,7 +34,7 @@ public class LifeManager : MonoBehaviour
 
         currentLives -= amount;
 
-        UpdateLivesText();
+        UpdateLiveImages(currentLives);
 
         if (currentLives <= 0)
         {
@@ -55,12 +55,17 @@ public class LifeManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
-    private void UpdateLivesText()
+    private void UpdateLiveImages(int lives)
     {
-        if (livesText != null)
+        if (lives == maxLives)
         {
-            livesText.text = "Lives: " + currentLives.ToString();
+            foreach (Image heart in hearts)
+                heart.enabled = true;
+
+            return;
         }
+
+        hearts[lives].enabled = false;
     }
 
     private void HideGameover()

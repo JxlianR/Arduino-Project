@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class PowerUpPickup : MonoBehaviour
 {
+    float lifetime = 5f;
+
     public enum PowerUpType
     {
         SpeedBoost,
@@ -10,6 +12,10 @@ public class PowerUpPickup : MonoBehaviour
         ScoreMultiplier
     }
 
+    private void Start()
+    {
+        Destroy(gameObject, lifetime);
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {

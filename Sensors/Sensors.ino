@@ -37,10 +37,6 @@ void setup() {
   digitalWrite(Buzzer, LOW);
 
   Serial.begin(9600);
-
-  //LED:
-  /*pinMode(ledPin,OUTPUT);
-  digitalWrite(ledPin,LOW);*/
 }
 
 void loop() {
@@ -91,21 +87,11 @@ void loop() {
       }
     }
 
+    // Make a sound with the buzzer
     char Input = Serial.read();
     if (Input == 'B'){
       BuzzerSound();
     }
-
-    /*input = Serial.parseInt();
-    if (input == 1){
-      LedGreen();
-    }
-    else if (input == 2){
-      LedRed();
-    }
-    else{
-      BuzzerSound();
-    }*/
   }
 }
 
@@ -129,15 +115,4 @@ void BuzzerSound()
   digitalWrite(Buzzer, HIGH);
   delay(10);
   digitalWrite(Buzzer, LOW);
-  //unsigned char i;
-  /*while (1)
-  {
-    for (i = 0; i < 50; i++) 
-    {
-      digitalWrite (Buzzer, HIGH) ;
-      delay (2) ;
-      digitalWrite (Buzzer, LOW) ;
-      delay (2) ;
-    }
-  }*/
 }
