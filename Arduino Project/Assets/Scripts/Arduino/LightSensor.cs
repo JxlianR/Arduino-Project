@@ -38,19 +38,25 @@ public class LightSensor : MonoBehaviour
     {
         if (lightsOut == false) return;
 
+        //Turning lights back on
         spriteRenderer.enabled = false;
         lightsOut = false;
+
+        //Turning lights off
         StartCoroutine(ChangeLights());
     }
 
     IEnumerator ChangeLights()
     {
+        // Wait for a random amount of time
         int waitSeconds = UnityEngine.Random.Range(minSeconds, maxSeconds);
         yield return new WaitForSeconds(waitSeconds);
 
+        // Turn lights off
         spriteRenderer.enabled = true;
         lightsOut = true;
 
+        // Text Feedback
         textMesh.text = "Oh no, lights went off.\nMaybe there's something I can do.";
         Camera mainCamera = Camera.main;
         Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);

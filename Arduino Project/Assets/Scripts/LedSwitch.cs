@@ -19,17 +19,12 @@ public class LedSwitch : MonoBehaviour
         StartSwitching();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void StartSwitching()
     {
         StartCoroutine(SwitchLed());
     }
 
+    //Switch LED color after a random amount of time
     IEnumerator SwitchLed()
     {
         greenLedOn = !greenLedOn;

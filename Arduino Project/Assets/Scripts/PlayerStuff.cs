@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerStuff : MonoBehaviour
 {
+    // This class is not getting used anymore
     // Other player-related variables and methods...
 
     public void PickupPowerUp(PowerUpPickup.PowerUpType powerUpType)

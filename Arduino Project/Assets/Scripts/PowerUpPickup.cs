@@ -33,31 +33,9 @@ public class PowerUpPickup : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-
-        /*if (other.tag == "Player")
-        {
-            Player player = other.GetComponent<Player>();
-            if (player != null)
-            {
-                player.storedPowerUp = this.gameObject;
-                player.powerUpAvailable = true;
-            }
-        }*/
     }
 
-    /*private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.tag == "Player")
-        {
-            Player player = other.GetComponent<Player>();
-            if (player != null)
-            {
-                player.storedPowerUp = null;
-                player.powerUpAvailable = false;
-            }
-        }
-    }*/
-
+    // Get a random Power-Up
     public PowerUpPickup.PowerUpType GetRandomPowerUpType()
     {
         PowerUpPickup.PowerUpType[] powerUpTypes = (PowerUpPickup.PowerUpType[])System.Enum.GetValues(typeof(PowerUpPickup.PowerUpType));

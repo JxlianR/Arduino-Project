@@ -55,6 +55,7 @@ public class LifeManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
+    // Reduce amount of heart images
     private void UpdateLiveImages(int lives)
     {
         if (lives == maxLives)

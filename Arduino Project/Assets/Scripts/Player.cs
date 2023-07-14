@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Increse speed the longer the player survives
         timeSurvived += Time.deltaTime;
         movementSpeed += timeSurvived * 0.0005f;
         Debug.Log(movementSpeed);
@@ -142,12 +143,17 @@ public class Player : MonoBehaviour
     void Invincible()
     {
         invincible = true;
+
+        // Ignore collision with obstacles
         Physics2D.IgnoreLayerCollision(6, 7, true);
+
+        //Change color of player (only alpha value)
         Color newColor = spriteRenderer.color;
         newColor.a = invincibilityAlpha;
         spriteRenderer.color = newColor;
     }
 
+    //Return to normal state
     void CancelInvincibility()
     {
         invincible = false;
