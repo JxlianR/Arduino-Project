@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     public float duration;
-    public int newSpawnInterval;
+    public int newinitialSpawnInterval;
 
     FallingObjectSpawner spawner;
 
@@ -23,8 +23,8 @@ public class PowerUp : MonoBehaviour
 
     public void ApplyEffect()
     {
-        float oldValue = spawner.spawnInterval;
-        spawner.spawnInterval = newSpawnInterval;
+        float oldValue = spawner.initialSpawnInterval;
+        spawner.initialSpawnInterval = newinitialSpawnInterval;
         gameObject.SetActive(false);
         StartCoroutine(CancelEffect(oldValue));
     }
@@ -32,7 +32,7 @@ public class PowerUp : MonoBehaviour
     IEnumerator CancelEffect(float oldValue)
     {
         yield return new WaitForSeconds(duration);
-        spawner.spawnInterval = oldValue;
+        spawner.initialSpawnInterval = oldValue;
         Destroy(gameObject);
     }
 }
