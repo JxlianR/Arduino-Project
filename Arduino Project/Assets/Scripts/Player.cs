@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     // Move variables
     public float movementSpeed, speedBoost;
-    float normalMovementSpeed;
+    float timeSurvived;
 
     // Variables for making player invincible
     public LayerMask playerLayer, obstacleLayer;
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.1f, groundLayer);
+        timeSurvived += Time.deltaTime;
     }
 
     public void Move(int input)
@@ -59,12 +59,12 @@ public class Player : MonoBehaviour
         if (input <= 15)
         {
             Debug.Log("Left");
-            rb.velocity = new Vector2(-movementSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(-(movementSpeed + (timeSurvived * 0.05f)), rb.velocity.y);
         }
         else if (input >= 16)
         {
             Debug.Log("Right");
-            rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(movementSpeed + (timeSurvived * 0.05f), rb.velocity.y);
         }
 
 
